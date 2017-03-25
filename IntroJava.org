@@ -1,0 +1,27 @@
+* Setup
+*** Project Generation
+    #+BEGIN_SRC sh :dir .
+      mvn archetype:generate -DgroupId=org.momus -DartifactId=SedgwickIntro
+    #+END_SRC
+*** Run your class with arguments
+******* Run your class with agruments:
+	- mvn -X -e exec:java -Dexec.mainClass=org.momus.algorithms.EuclidsGCD  -Dexec.args="340 1200"
+	- -X adds logs of dubugging information.
+* Chapter 1
+*** Write it!
+    #+BEGIN_SRC java :tangle ~/repos/learnin/Java/SedgwickIntroJava/SedgwickIntro/src/main/java/org/momus/HelloWorld.java
+      public class HelloWorld {
+          public static void main(String[] args){
+              //Prints "Hello, World" in the terminal window.
+              System.out.println("Hello, World");
+          }
+      }
+    #+END_SRC
+*** Run it!
+    #+BEGIN_SRC sh :dir ./SedgwickIntro/
+      mvn -X -e exec:java -Dexec.mainClass=org.momus.SedgwickIntro.HelloWord
+    #+END_SRC
+
+    #+RESULTS:
+  
+  
