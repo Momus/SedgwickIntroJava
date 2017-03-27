@@ -1,3 +1,5 @@
+#+PROPERTY: header-args:sh :var ARGS="-Dexec.args" :results verbatim
+
 * Setup
 *** Project Generation
     #+BEGIN_SRC sh :dir .
@@ -8,20 +10,34 @@
 	- mvn -X -e exec:java -Dexec.mainClass=org.momus.algorithms.EuclidsGCD  -Dexec.args="340 1200"
 	- -X adds logs of dubugging information.
 * Chapter 1
-*** Write it!
-    #+BEGIN_SRC java :tangle ~/repos/learnin/Java/SedgwickIntroJava/SedgwickIntro/src/main/java/org/momus/HelloWorld.java
-      public class HelloWorld {
-          public static void main(String[] args){
-              //Prints "Hello, World" in the terminal window.
-              System.out.println("Hello, World");
-          }
-      }
-    #+END_SRC
-*** Run it!
-    #+BEGIN_SRC sh :dir ./SedgwickIntro/
-      mvn -X -e exec:java -Dexec.mainClass=org.momus.SedgwickIntro.HelloWord
-    #+END_SRC
+*** Hello World!
+    Got Maven working, and maybe even Eclim, we will see. At least now
+    I should have no distractions from the actual java. This secion
+    can be used as a template.
+***** Write it!
+      #+BEGIN_SRC java :tangle src/main/java/org/momus/HelloWorld.java
+        package org.momus;
 
-    #+RESULTS:
+        public class HelloWorld {
+            public static void main(String[] args){
+                String name = "";
+                if (args.length > 0) {name = args[0];}
+                else {name = "World" ;}
+                System.out.println("Hello, " + name + "!");
+            }
+        }
+      #+END_SRC
+***** Run it!
+      #+HEADER: :var MAVENEXEC="mvn exec:java -Dexec.mainClass=org.momus.HelloWorld"
+      #+BEGIN_SRC sh 
+        #$MAVENEXEC | grep -v INFO
+        $MAVENEXEC | grep -v INFO
+        $MAVENEXEC $ARGS="Emy" | grep -v INFO
+      #+END_SRC
+
+      #+RESULTS:
+      : Hello, World!
+      : Hello, Emy!
+
   
   
