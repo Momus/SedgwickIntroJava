@@ -19,12 +19,18 @@
         package org.momus;
 
         public class HelloWorld {
-            public static void main(String[] args){
+
+            public static String greeting(String[] names) {
                 String name = "";
-                if (args.length > 0) {name = args[0];}
-                else {name = "World" ;}
-                System.out.println("Hello, " + name + "!");
+                name = (names.length > 0) ? names[0] : "World";
+                return "Hello, " + name + "!";
             }
+
+
+            public static void main(String[] args){
+                System.out.println( greeting(args) );
+            }
+
         }
       #+END_SRC
 ***** Run it!
@@ -33,11 +39,68 @@
         #$MAVENEXEC | grep -v INFO
         $MAVENEXEC | grep -v INFO
         $MAVENEXEC $ARGS="Emy" | grep -v INFO
+        $MAVENEXEC $ARGS="Emily Bishton" | grep -v INFO
       #+END_SRC
 
       #+RESULTS:
       : Hello, World!
       : Hello, Emy!
+      : Hello, Emily!
+***** Test it!
+******* Write the tests.
+        #+BEGIN_SRC java :tangle ./src/test/java/org/momus/HelloWorldTest.java
+          package org.momus;
+
+          import junit.framework.Test;
+          import junit.framework.TestCase;
+          import junit.framework.TestSuite;
+
+          /**
+           ,* Unit test for simple App.
+           ,*/
+          public class HelloWorldTest 
+              extends TestCase
+          {
+
+              /**
+               ,* Rigourous Test :-)
+               ,*/
+              public void testHelloWorld()
+              {
+                  String[] Emy = {"Emy"};
+                  String[] FullName = { "Emily", "Bishton"};
+                  String[] Empty = {};
+        
+                  assertEquals( "Emy!", "Hello, Emy!", HelloWorld.greeting(Emy));
+                  assertEquals( "Say hi to everyone", "Hello, World!", HelloWorld.greeting(Empty));
+                  assertEquals( "Ignore surnames" , "Hello, Emily!", HelloWorld.greeting(FullName));
+              }
+          }
+        #+END_SRC
+******* Run the tests
+        #+BEGIN_SRC sh
+          mvn test | grep -v INFO
+        #+END_SRC
+
+        #+RESULTS:
+        #+begin_example
+        [WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+        [WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+        -------------------------------------------------------
+         T E S T S
+        -------------------------------------------------------
+        Running org.momus.AppTest
+        Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 sec
+        Running org.momus.HelloWorldTest
+        Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec
+
+        Results :
+
+        Tests run: 2, Failures: 0, Errors: 0, Skipped: 0
+
+        #+end_example
+
 
   
   

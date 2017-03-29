@@ -1,10 +1,16 @@
 package org.momus;
 
 public class HelloWorld {
-    public static void main(String[] args){
+
+    public static String greeting(String[] names) {
         String name = "";
-        if (args.length > 0) {name = args[0];}
-        else {name = "World" ;}
-        System.out.println("Hello, " + name + "!");
+        name = (names.length > 0) ? names[0] : "World";
+        return "Hello, " + name + "!";
     }
+
+
+    public static void main(String[] args){
+        System.out.println( greeting(args) );
+    }
+
 }
